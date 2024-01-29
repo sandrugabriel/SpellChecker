@@ -1,5 +1,4 @@
-﻿using SpellChecker.View.Mockups;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,15 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SpellChecker
+namespace SpellChecker.View.Mockups
 {
-    public partial class Form1 : Form
+    public partial class MockupHome : Form
     {
-        public Form1()
+        public MockupHome()
         {
             InitializeComponent();
-
-           // this.Controls.Add(new MockupHome());
         }
     }
 }
