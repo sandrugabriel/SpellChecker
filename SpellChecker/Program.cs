@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpellChecker.View.Mockups;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace SpellChecker
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MockupHome());
         }
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]

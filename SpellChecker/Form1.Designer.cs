@@ -35,6 +35,7 @@
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.bunifuFormResizer1 = new Bunifu.UI.WinForms.BunifuFormResizer(this.components);
             this.bunifuFormDrag1 = new Bunifu.UI.WinForms.BunifuFormDrag();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -147,12 +148,21 @@
             this.bunifuFormDrag1.TitleBarOptions.TitleBarControl = this.panel1;
             this.bunifuFormDrag1.TitleBarOptions.UseBackColorOnDockingIndicators = false;
             // 
+            // panel2
+            // 
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 54);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1435, 718);
+            this.panel2.TabIndex = 1;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(244)))), ((int)(((byte)(237)))));
             this.ClientSize = new System.Drawing.Size(1435, 772);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MinimumSize = new System.Drawing.Size(1200, 650);
@@ -171,5 +181,6 @@
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
         private Bunifu.UI.WinForms.BunifuFormResizer bunifuFormResizer1;
         private Bunifu.UI.WinForms.BunifuFormDrag bunifuFormDrag1;
+        private System.Windows.Forms.Panel panel2;
     }
 }
