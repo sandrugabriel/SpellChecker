@@ -33,26 +33,25 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.bunifuFormControlBox1 = new Bunifu.UI.WinForms.BunifuFormControlBox();
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
-            this.bunifuFormResizer1 = new Bunifu.UI.WinForms.BunifuFormResizer(this.components);
             this.bunifuFormDrag1 = new Bunifu.UI.WinForms.BunifuFormDrag();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.bunifuFormResizer1 = new Bunifu.UI.WinForms.BunifuFormResizer(this.components);
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(37)))), ((int)(((byte)(69)))));
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(26)))), ((int)(((byte)(60)))));
             this.panel1.Controls.Add(this.bunifuFormControlBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1435, 54);
+            this.panel1.Size = new System.Drawing.Size(1435, 55);
             this.panel1.TabIndex = 0;
             // 
             // bunifuFormControlBox1
             // 
             this.bunifuFormControlBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.bunifuFormControlBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(37)))), ((int)(((byte)(69)))));
+            this.bunifuFormControlBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(26)))), ((int)(((byte)(60)))));
             this.bunifuFormControlBox1.BunifuFormDrag = null;
             this.bunifuFormControlBox1.CloseBoxOptions.BackColor = System.Drawing.Color.Transparent;
             this.bunifuFormControlBox1.CloseBoxOptions.BorderRadius = 0;
@@ -116,13 +115,6 @@
             this.bunifuElipse1.ElipseRadius = 15;
             this.bunifuElipse1.TargetControl = this;
             // 
-            // bunifuFormResizer1
-            // 
-            this.bunifuFormResizer1.ContainerControl = this;
-            this.bunifuFormResizer1.Enabled = true;
-            this.bunifuFormResizer1.ParentForm = this;
-            this.bunifuFormResizer1.ResizeHandlesWidth = 6;
-            // 
             // bunifuFormDrag1
             // 
             this.bunifuFormDrag1.AllowOpacityChangesWhileDragging = false;
@@ -148,27 +140,27 @@
             this.bunifuFormDrag1.TitleBarOptions.TitleBarControl = this.panel1;
             this.bunifuFormDrag1.TitleBarOptions.UseBackColorOnDockingIndicators = false;
             // 
-            // panel2
+            // bunifuFormResizer1
             // 
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 54);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1435, 718);
-            this.panel2.TabIndex = 1;
+            this.bunifuFormResizer1.ContainerControl = this;
+            this.bunifuFormResizer1.Enabled = true;
+            this.bunifuFormResizer1.ParentForm = this;
+            this.bunifuFormResizer1.ResizeHandlesWidth = 10;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(244)))), ((int)(((byte)(237)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(26)))), ((int)(((byte)(55)))));
             this.ClientSize = new System.Drawing.Size(1435, 772);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.MinimumSize = new System.Drawing.Size(1200, 650);
+            this.MinimumSize = new System.Drawing.Size(1435, 772);
             this.Name = "Form1";
+            this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -179,8 +171,7 @@
         private System.Windows.Forms.Panel panel1;
         private Bunifu.UI.WinForms.BunifuFormControlBox bunifuFormControlBox1;
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
-        private Bunifu.UI.WinForms.BunifuFormResizer bunifuFormResizer1;
         private Bunifu.UI.WinForms.BunifuFormDrag bunifuFormDrag1;
-        private System.Windows.Forms.Panel panel2;
+        private Bunifu.UI.WinForms.BunifuFormResizer bunifuFormResizer1;
     }
 }
