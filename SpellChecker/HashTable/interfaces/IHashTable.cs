@@ -13,15 +13,14 @@ namespace SpellChecker.HashTable.interfaces
 
         V Get(K key);
 
-        void citireFisier();
+        List<string> SugestiiCorectii(string cuvantGresit);
 
         bool Remove(K key);
 
         string ToString();
 
-        void verificareOrtografica();
+        List<string> verificareOrtografica(List<string> cuvinte);
 
-        void sugesti();
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using SpellChecker.HashTable.interfaces;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,13 +10,10 @@ using System.Threading.Tasks;
 
 namespace SpellChecker.HashTable
 {
-    internal class HashTable<K,V>: IHashTable<K, V> where K : IComparable<K>
+    public class HashTable<K,V>: IHashTable<K, V> where K : IComparable<K>
     {
 
         private readonly List<Stored<K, V>>[] hashtable;
-        private List<string> cuvinte;
-        private List<string> cuvinteGresite;
-
 
         public HashTable(int size)
         {
@@ -28,103 +26,80 @@ namespace SpellChecker.HashTable
             }
         }
 
-        public void citireFisier()
+
+        public List<string> SugestiiCorectii(string cuvantGresit)
         {
-            cuvinte = new List<string>();
-            string path = @"\Mycode\CSHARP\Teorie\StructuriDeDate\StructuriDeDate\bin\Debug\data\text.txt";
+            List<string> sugestii = new List<string>();
 
-            StreamReader streamReader = new StreamReader(path);
+            int cheie = (int)cuvantGresit[0];
 
-
-            string t = "";
-            string text = "";
-            while ((t = streamReader.ReadLine()) != null)
+            for (int i = 0; i < hashtable[cheie].Count; i++)
             {
-                text += t;
-                for (int i = 0; i < t.Split(' ').Length; i++)
+                string cuvantDictionar = hashtable[cheie][i].Value.ToString();
+
+                double jaccardSimilarity = CalculeazaJaccardSimilarity(cuvantGresit, cuvantDictionar);
+                if (jaccardSimilarity > 0.7)
                 {
-                    cuvinte.Add(t.Split(' ')[i]);
+                    sugestii.Add(cuvantDictionar);
                 }
+
             }
 
-            Console.WriteLine("TEXT:\n" + text);
-            streamReader.Close();
+            sugestii.Sort((x, y) => x.Length.CompareTo(y.Length));
 
-            for (int i = 0; i < cuvinte.Count; i++)
-            {
-                cuvinte[i] = cuvinte[i].ToLower();
-
-
-                for (int k = 0; k < cuvinte[i].Length; k++)
-                {
-                    if ((cuvinte[i][k] >= 33 && cuvinte[i][k] <= 47) || (cuvinte[i][k] >= 58 && cuvinte[i][k] <= 64))
-                    {
-                        cuvinte[i] = cuvinte[i].Remove(k);
-                    }
-                }
-            }
+            sugestii = sugestii.Take(3).ToList();
+            return sugestii;
         }
 
-        public void verificareOrtografica()
+        private double CalculeazaJaccardSimilarity(string s1, string s2)
         {
-            cuvinteGresite = new List<string>();
-            Console.Write("\nIncorrect words: ");
+            var set1 = new HashSet<char>(s1);
+            var set2 = new HashSet<char>(s2);
+
+            var intersection = new HashSet<char>(set1);
+            intersection.IntersectWith(set2);
+
+            var union = new HashSet<char>(set1);
+            union.UnionWith(set2);
+
+            double jaccardSimilarity = (double)intersection.Count / union.Count;
+            return jaccardSimilarity;
+        }
+
+        public List<string> verificareOrtografica(List<string> cuvinte)
+        {
+            List<string>cuvinteGresite = new List<string>();
             if (cuvinte.Count > 0)
             {
-
+              
                 for (int i = 0; i < cuvinte.Count; i++)
                 {
-                    int ok = 0;
-                    int nr = cuvinte[i][0];
-                    // Console.WriteLine("AA"+nr+"AA");
-                    foreach (var item in hashtable[nr])
+                    if (cuvinte[i].Length >= 1)
                     {
-                        if (item.Value.ToString().Equals(cuvinte[i]))
+                        int ok = 0;
+                        int nr = cuvinte[i].ToLower().Trim()[0];
+                        foreach (var item in hashtable[nr])
                         {
-                            ok = 1;
+                            if (item.Value.ToString().Equals(cuvinte[i].ToLower().Trim()))
+                            {
+                                ok = 1;
+                                break;
+                            }
+                        }
+
+                        if (ok == 0)
+                        {
+                            cuvinteGresite.Add(cuvinte[i]);
                         }
                     }
-
-                    if (ok == 0)
-                    {
-                        Console.Write(cuvinte[i] + ",");
-                        cuvinteGresite.Add(cuvinte[i]);
-                    }
+                   
                 }
 
 
 
             }
 
-
-        }
-
-        public void sugesti()
-        {
-            //cuvintele gresite:
-            //cghecker,reatds,inrto,fgrom,ine,
-            //sugestii la:
-            //cghecker este checker
-            //reatds este reads
-            //inrto este into
-            //fgrom este from
-            //ine este in
-
-
-            for (int i = 0; i < cuvinteGresite.Count; i++)
-            {
-                Console.WriteLine($"Suggestions for the word {cuvinteGresite[i]}:");
-                string pattern = $"/{cuvinteGresite[i][cuvinteGresite[i].Length - 1]}$/";
-                MatchCollection matches = Regex.Matches(cuvinteGresite[i], pattern);
-
-                foreach (Match match in matches)
-                {
-                    Console.WriteLine(match.Groups[1].Value);
-                }
-
-            }
-
-
+            return cuvinteGresite;
         }
 
         private int HashKey(K key)
